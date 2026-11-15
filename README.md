@@ -138,7 +138,7 @@ The logical modules may initially live in one Maven application module using fea
 | JUnit 5 | Automated testing |
 | Mockito | Unit testing |
 | Testcontainers | Real PostgreSQL and Kafka integration tests |
-| Docker | Reproducible local infrastructure |
+| Docker | Reproducible local infrastructure (`compose.yaml`) |
 
 ### Infrastructure strategy
 
@@ -147,7 +147,7 @@ The first implementation requires only:
 - Spring Boot
 - PostgreSQL
 - Flyway
-- Docker
+- Docker Compose (`compose.yaml`)
 
 Kafka is introduced only after the core job and workflow execution mechanisms are reliable.
 
@@ -365,17 +365,19 @@ If a later operation permanently fails, the workflow can execute compensating ac
 
 ## 9. Development Roadmap
 
-Development is intentionally incremental.
+Development is intentionally incremental, following the 9 phases defined in `workflow.md`.
 
-| Phase | Scope |
-|---|---|
-| 1 | Persistent job submission, database schema, atomic claiming and worker execution |
-| 2 | Retries, backoff, dead letters, leases, heartbeats, recovery and fencing |
-| 3 | Concurrency testing, crash recovery and Testcontainers |
-| 4 | Workflow DAGs, dependencies, conditions and state transitions |
-| 5 | Saga compensation, tenant fairness and workflow event history |
-| 6 | Transactional outbox and Kafka event publishing |
-| 7 | Metrics, observability, performance testing and documentation |
+| Phase | Description | Scope |
+|---|---|---|
+| 0 | Project Foundation | Build configuration, Spring Boot setup, PostgreSQL, Flyway, Docker Compose (`compose.yaml`), and health checks |
+| 1 | Durable Job Engine | Persistent job submission, database schema, atomic claiming (`SKIP LOCKED`), and worker execution |
+| 2 | Execution Reliability | Retries, backoff, dead letters, leases, heartbeats, recovery, fencing tokens, and cancellation |
+| 3 | Concurrency and Failure Testing | Concurrency testing, crash recovery, stale worker fencing tests, and Testcontainers |
+| 4 | Workflow Engine | Workflow DAGs, dependencies, conditions, cycle detection, and state transitions |
+| 5 | Saga Compensation | Saga compensation, reverse-order execution, compensation retries, and failure recovery |
+| 6 | Tenant-Fair Scheduling | Tenant-aware fair scheduling, round-robin/weighted claiming, and starvation prevention |
+| 7 | Workflow Event History and Outbox | Append-only workflow execution history, transactional outbox, and Kafka event publishing |
+| 8 | Observability and Production Readiness | Metrics, health endpoints, graceful shutdown, performance testing, and documentation |
 
 No advanced phase should begin before its preceding phase passes its acceptance tests.
 
@@ -449,3 +451,15 @@ Weftline aims to demonstrate how a reliable asynchronous execution system can be
 The focus is not simply building a queue or executing background threads. It is understanding and solving the engineering problems of durable state, concurrent ownership, failure recovery, scheduling fairness, workflow dependencies and reliable event publication.
 
 **Weftline — Reliable execution, from individual jobs to complex workflows.**
+
+---
+
+## 14. Project Documentation
+
+Detailed project specifications and guides:
+
+- [workflow.md](workflow.md) — Master implementation workflow and engineering contract
+- [status.md](status.md) — Current development phase and tracking record
+- [docs/architecture.md](docs/architecture.md) — Modular monolith architecture and subsystem design
+- [docs/schema.md](docs/schema.md) — PostgreSQL data model and database schema specifications
+- [docs/testing.md](docs/testing.md) — Concurrency, crash recovery, and testing strategy

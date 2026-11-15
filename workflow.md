@@ -101,7 +101,7 @@ These decisions are established and must not be changed casually.
 | Metrics | Micrometer |
 | Health | Spring Boot Actuator |
 | Integration tests | Testcontainers |
-| Local infrastructure | Docker Compose |
+| Local infrastructure | Docker Compose (compose.yaml) |
 
 ## 3.1 PostgreSQL is the source of truth
 
@@ -673,7 +673,7 @@ The project must be implemented in the following order.
 - [ ] Integrate Flyway.
 - [ ] Configure basic logging.
 - [ ] Add initial database migration.
-- [ ] Create Docker configuration.
+- [ ] Create Docker configuration (`compose.yaml` and `Dockerfile`).
 - [ ] Create basic health endpoint.
 - [ ] Configure basic unit testing.
 
@@ -699,7 +699,7 @@ weftline/
 │   |
 │   └── test/
 |
-├── docker-compose.yml
+├── compose.yaml
 ├── Dockerfile
 ├── pom.xml
 ├── README.md
@@ -1815,7 +1815,7 @@ Weftline's initial full scope is complete when:
 - [ ] Concurrency testing.
 - [ ] Failure injection testing.
 - [ ] Testcontainers.
-- [ ] Docker Compose.
+- [ ] Docker Compose (`compose.yaml`).
 - [ ] Actuator health endpoints.
 - [ ] Micrometer metrics.
 - [ ] Structured logging.

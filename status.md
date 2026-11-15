@@ -29,7 +29,7 @@
 | 4 | Workflow Engine | NOT STARTED |
 | 5 | Saga Compensation | NOT STARTED |
 | 6 | Tenant-Fair Scheduling | NOT STARTED |
-| 7 | Event History and Kafka Outbox | NOT STARTED |
+| 7 | Workflow Event History and Outbox | NOT STARTED |
 | 8 | Observability and Production Readiness | NOT STARTED |
 
 ## Completed Features
