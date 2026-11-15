@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: weftline
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/weftline}
+    username: ${DB_USER:weftline}
+    password: ${DB_PASSWORD:weftline}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
